@@ -23,7 +23,7 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.EC2_PUBLIC_IP }}
-        username: ${{ secrets.EC2_SSH_KEY }}
+        username: ubuntu
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
           cd ~/myproject/node-devops-project/k8s
