@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
       - name: voting-app
-        image: voting-app
-        imagePullPolicy: Never
+        image: vishanth007/node-devops-project:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8090
         env:
