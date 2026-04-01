@@ -18,15 +18,14 @@ jobs:
         context: .
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/voting-app:latest
-   #Deploy Step
-    - name: Deploy to EC2
+   #Deploy to Kubernetes
+    - name: Deploy to Kubernetes
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.EC2_PUBLIC_IP }}
-        username: ubuntu
+        username: ${{ secrets.EC2_SSH_KEY }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          cd ~/myproject/node-devops-project
-          docker-compose down
-          docker-compose pull
-          docker-compose up -d
+          cd ~/myproject/node-devops-project/k8s
+          kubectl apply -f .
+          kubectl rollout restart deployment voting-app
