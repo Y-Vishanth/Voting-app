@@ -2,6 +2,10 @@ name: Voting-app CI/CD pipeline
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'app/**'
+      - 'Dockerfile'
+      - 'k8s/**'
   pull_request:
     branches: [ main ]
 jobs:
