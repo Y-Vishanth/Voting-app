@@ -1,11 +1,6 @@
 🚀 Voting App CI/CD Pipeline (Docker → Kubernetes → GitHub Actions)
 
-<p align="center">
-  <img src="https://img.shields.io/badge/CI-CD%20Pipeline-GitHub%20Actions-blue?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/Container-Docker-blue?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/Orchestration-Kubernetes-blue?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/Cloud-AWS%20EC2-orange?style=for-the-badge"/>
-</p>---
+![image_alt](https://github.com/Y-Vishanth/Voting-app/blob/6f8fdaffe5ecdf99519a2fde0e622ca2395d9f8e/App%20pic.jpeg)
 
 📌 Project Overview
 
@@ -31,7 +26,7 @@ This is a real-time voting application where users vote on:
 
 👉 "Who will win World War 3?"
 
-- 🌍 Option 1: Iran
+- ir Option 1: Iran
 - 🇺🇸 Option 2: USA
 
 ✨ Features:
@@ -43,9 +38,6 @@ This is a real-time voting application where users vote on:
 
 ---
 
-🖼️ Application Preview
-
-"Voting App" (./assets/voting-app.png)
 
 ---
 
@@ -79,19 +71,6 @@ Database| MongoDB
 Cache| Redis
 
 ---
-
-📁 Project Structure
-
-.
-├── app/                    # Application source code
-├── Dockerfile             # Docker build file
-├── k8s/
-│   ├── deployment.yaml    # Kubernetes Deployment
-│   ├── service.yaml       # Kubernetes Service
-├── .github/workflows/
-│   └── ci-cd.yaml         # GitHub Actions pipeline
-├── docker-compose.yml     # Local development setup
-└── README.md
 
 ---
 
