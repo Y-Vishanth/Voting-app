@@ -1,112 +1,174 @@
-# Node DevOps Mongo Redis Demo
+---
 
-## Overview
-This project demonstrates a simple Node.js application deployed using Docker and Docker Compose with MongoDB and Redis.
+🚀 Voting App CI/CD Pipeline (Docker → Kubernetes → GitHub Actions)
 
-## Architecture
+---
 
-Node.js → Application server  
-MongoDB → Database  
-Redis → Caching service  
+📌 Project Overview
+This project demonstrates a complete CI/CD pipeline for a containerized Voting Application using:
+⚙️ GitHub Actions for automation
+🐳 Docker for containerization
+☸️ Kubernetes for orchestration
+☁️ AWS EC2 for deployment
 
-All services run in separate Docker containers and communicate through Docker Compose networking.
+The pipeline automatically builds, pushes, and deploys the application whenever changes are made to the repository.
 
-## Project Structure
+---
+🗳️ About the Application
+This is a simple real-time voting application where users can vote on a fun scenario:
 
-app.js – Node application  
-Dockerfile – Build Node container  
-docker-compose.yml – Run multi-container setup  
-.env – Environment variables  
+> “Who will win World War 3?”
+🎯 Features:
+Users can vote between:
+🇮🇷 Iran
+🇺🇸 USA
+Displays live vote counts
+Shows results using progress bars
+Backend connected to:
+Redis (for caching / real-time updates)
+MongoDB (for persistence)
 
-## Setup Instructions
+This app is used as a sample microservice-based application to demonstrate real-world DevOps workflows.
 
-Clone the repository
+---
 
-Run the application
+🧠 Architecture Flow
+Developer → GitHub Repository → GitHub Actions (CI)
+                                      ↓
+                            Build Docker Image
+                                      ↓
+                            Push to Docker Hub
+                                      ↓
+                            SSH into EC2
+                                      ↓
+                            Deploy to Kubernetes
+                                      ↓
+                            Expose via NodePort
 
-docker-compose up --build
+---
 
-Application will be available at
+🛠️ Tech Stack
+Category	               Tools
+CI/CD	                 GitHub Actions
+Containerization	     Docker
+Orchestration	         Kubernetes
+Cloud                    AWS 
+Registry	             Docker Hub
+Backend Services	     Redis, MongoDB
 
-http://localhost:8090
+---
 
-## Endpoints
-
-/ → confirms application is running  
-/health → returns application health status
-
-## Tech Stack
-
-Node.js
-
-Docker
-
-Docker Compose
-
-MongoDB
-
-Redis
-
-Linux (AWS EC2)
-
-## Project Structure
-
-node-devops-project
+📂 Project Structure
+node-devops-project/
 │
-├── app.js
-├── package.json
-├── Dockerfile
-├── docker-compose.yml
-├── .env
-└── README.md
+├── .github/workflows/
+│   └── ci-cd.yaml              # CI/CD pipeline
+│
+├── k8s/
+│   ├── deployment.yaml         # Kubernetes deployment
+│   ├── service.yaml            # Kubernetes service
+│
+├── docker-compose.yml          # Local setup
+├── Dockerfile                  # Image build
+└── app/                        # Application source
 
-## Setup Instructions
+---
 
-1️⃣ Clone the repository
+🖥️ How to Run Locally
+
+---
+
+🔹 Step 1: Clone Repository
 git clone https://github.com/Y-Vishanth/node-devops-project.git
 cd node-devops-project
 
-2️⃣ Start the application
-docker-compose up --build
+---
 
-This will start the following containers:
+🔹 Step 2: Install Requirements
+Docker
+Docker Compose
 
-Node.js Application
-MongoDB
-Redis
+---
 
-## Access the application
+🔹 Step 3: Start Application
+docker-compose up -d
 
-Open in browser:
+---
 
+🔹 Step 4: Verify Running Containers
+docker ps
+
+---
+
+🔹 Step 5: Access Application
 http://localhost:8090
 
-Health endpoint:
+---
 
-http://localhost:8090/health
+⚙️ CI/CD Pipeline
 
-## Data Persistence
+---
 
-MongoDB uses Docker volumes to ensure data persists even if the container is restarted or removed.
+📄 Workflow File
 
-Volume → mongo-data
-Mount → /data/db
+Refer:
+.github/workflows/ci-cd.yaml
 
-## DevOps Concepts Demonstrated
+Pipeline Responsibilities:
+Build Docker image
+Push image to Docker Hub
+Deploy to Kubernetes on EC2
 
-Docker containerization
+---
 
-Multi-container orchestration using Docker Compose
+☸️ Kubernetes Deployment
 
-Service discovery using Docker networking
+---
 
-Environment variable management with .env
+📄 Deployment File
+k8s/deployment.yaml
 
-Persistent storage using Docker volumes
+---
+📄 Service File
+k8s/service.yaml
 
-## Author
+---
 
-Vishanth Yelamarthy
+🚀 Deployment Flow
 
-GitHub
-https://github.com/Y-Vishanth
+---
+
+🔹 Step 1: Push Code
+git add .
+git commit -m "Trigger pipeline"
+git push origin main
+
+---
+
+🔹 Step 2: Pipeline Execution
+GitHub Actions triggers automatically
+Docker image is built and pushed
+Deployment is updated on EC2
+
+---
+
+🔹 Step 3: Verify Deployment
+kubectl get pods
+kubectl get svc
+
+---
+
+🌐 Access Application (Production)
+http://<EC2-PUBLIC-IP>:30004
+
+---
+
+🔄 End-to-End Flow
+Code Push → Build → Push Image → Deploy → Kubernetes → App Live
+
+---
+Author:
+
+Vishath Yelamarthi
+
+
