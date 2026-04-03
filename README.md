@@ -1,174 +1,178 @@
----
-
 🚀 Voting App CI/CD Pipeline (Docker → Kubernetes → GitHub Actions)
 
----
+<p align="center">
+  <img src="https://img.shields.io/badge/CI-CD%20Pipeline-GitHub%20Actions-blue?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Container-Docker-blue?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Orchestration-Kubernetes-blue?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Cloud-AWS%20EC2-orange?style=for-the-badge"/>
+</p>---
 
 📌 Project Overview
-This project demonstrates a complete CI/CD pipeline for a containerized Voting Application using:
-⚙️ GitHub Actions for automation
-🐳 Docker for containerization
-☸️ Kubernetes for orchestration
-☁️ AWS EC2 for deployment
 
-The pipeline automatically builds, pushes, and deploys the application whenever changes are made to the repository.
+This project demonstrates an end-to-end CI/CD pipeline for a containerized application using:
+
+- ⚙️ GitHub Actions for automation
+- 🐳 Docker for containerization
+- ☸️ Kubernetes for orchestration
+- ☁️ AWS EC2 for deployment
+
+Whenever code is pushed to GitHub, the pipeline:
+
+1. Builds a Docker image
+2. Pushes it to Docker Hub
+3. Connects to EC2
+4. Deploys the latest version to Kubernetes
 
 ---
+
 🗳️ About the Application
-This is a simple real-time voting application where users can vote on a fun scenario:
 
-> “Who will win World War 3?”
-🎯 Features:
-Users can vote between:
-🇮🇷 Iran
-🇺🇸 USA
-Displays live vote counts
-Shows results using progress bars
-Backend connected to:
-Redis (for caching / real-time updates)
-MongoDB (for persistence)
+This is a real-time voting application where users vote on:
 
-This app is used as a sample microservice-based application to demonstrate real-world DevOps workflows.
+👉 "Who will win World War 3?"
+
+- 🌍 Option 1: Iran
+- 🇺🇸 Option 2: USA
+
+✨ Features:
+
+- Real-time vote updates
+- Backend powered by Redis & MongoDB
+- Simple and responsive UI
+- Fully containerized architecture
 
 ---
 
-🧠 Architecture Flow
-Developer → GitHub Repository → GitHub Actions (CI)
-                                      ↓
-                            Build Docker Image
-                                      ↓
-                            Push to Docker Hub
-                                      ↓
-                            SSH into EC2
-                                      ↓
-                            Deploy to Kubernetes
-                                      ↓
-                            Expose via NodePort
+🖼️ Application Preview
+
+"Voting App" (./assets/voting-app.png)
+
+---
+
+🏗️ Architecture
+
+Developer → GitHub → GitHub Actions → Docker Hub → EC2 → Kubernetes → Browser
+
+---
+
+🔄 CI/CD Workflow
+
+1. Code pushed to GitHub (main branch)
+2. GitHub Actions triggered
+3. Docker image built
+4. Image pushed to Docker Hub
+5. SSH into EC2
+6. Kubernetes manifests applied
+7. Deployment updated automatically
 
 ---
 
 🛠️ Tech Stack
-Category	               Tools
-CI/CD	                 GitHub Actions
-Containerization	     Docker
-Orchestration	         Kubernetes
-Cloud                    AWS 
-Registry	             Docker Hub
-Backend Services	     Redis, MongoDB
+
+Category| Tools Used
+CI/CD| GitHub Actions
+Container| Docker
+Orchestration| Kubernetes
+Cloud| AWS EC2
+Backend| Node.js
+Database| MongoDB
+Cache| Redis
 
 ---
 
-📂 Project Structure
-node-devops-project/
-│
-├── .github/workflows/
-│   └── ci-cd.yaml              # CI/CD pipeline
-│
+📁 Project Structure
+
+.
+├── app/                    # Application source code
+├── Dockerfile             # Docker build file
 ├── k8s/
-│   ├── deployment.yaml         # Kubernetes deployment
-│   ├── service.yaml            # Kubernetes service
-│
-├── docker-compose.yml          # Local setup
-├── Dockerfile                  # Image build
-└── app/                        # Application source
+│   ├── deployment.yaml    # Kubernetes Deployment
+│   ├── service.yaml       # Kubernetes Service
+├── .github/workflows/
+│   └── ci-cd.yaml         # GitHub Actions pipeline
+├── docker-compose.yml     # Local development setup
+└── README.md
 
 ---
 
-🖥️ How to Run Locally
+⚙️ How to Run Locally
 
----
+🔹 Step 1: Clone the Repository
 
-🔹 Step 1: Clone Repository
 git clone https://github.com/Y-Vishanth/node-devops-project.git
 cd node-devops-project
 
 ---
 
-🔹 Step 2: Install Requirements
-Docker
-Docker Compose
+🔹 Step 2: Run using Docker Compose
 
----
-
-🔹 Step 3: Start Application
 docker-compose up -d
 
 ---
 
-🔹 Step 4: Verify Running Containers
-docker ps
+🔹 Step 3: Access the Application
 
----
-
-🔹 Step 5: Access Application
 http://localhost:8090
-
----
-
-⚙️ CI/CD Pipeline
-
----
-
-📄 Workflow File
-
-Refer:
-.github/workflows/ci-cd.yaml
-
-Pipeline Responsibilities:
-Build Docker image
-Push image to Docker Hub
-Deploy to Kubernetes on EC2
 
 ---
 
 ☸️ Kubernetes Deployment
 
----
+🔹 Apply Kubernetes Files
 
-📄 Deployment File
-k8s/deployment.yaml
-
----
-📄 Service File
-k8s/service.yaml
+kubectl apply -f k8s/
 
 ---
 
-🚀 Deployment Flow
+🔹 Verify Pods
 
----
-
-🔹 Step 1: Push Code
-git add .
-git commit -m "Trigger pipeline"
-git push origin main
-
----
-
-🔹 Step 2: Pipeline Execution
-GitHub Actions triggers automatically
-Docker image is built and pushed
-Deployment is updated on EC2
-
----
-
-🔹 Step 3: Verify Deployment
 kubectl get pods
+
+---
+
+🔹 Check Services
+
 kubectl get svc
 
 ---
 
-🌐 Access Application (Production)
+🔹 Access Application
+
 http://<EC2-PUBLIC-IP>:30004
 
 ---
 
-🔄 End-to-End Flow
-Code Push → Build → Push Image → Deploy → Kubernetes → App Live
+🔐 GitHub Secrets Used
+
+Secret Name| Purpose
+DOCKER_USERNAME| Docker Hub login
+DOCKER_PASSWORD| Docker Hub password
+EC2_PUBLIC_IP| EC2 connection
+EC2_SSH_KEY| SSH authentication
 
 ---
-Author:
 
-Vishath Yelamarthi
+🚀 Key Highlights
+
+- 🔥 Fully automated CI/CD pipeline
+- ⚡ Zero manual deployment
+- 📦 Containerized microservice setup
+- ☸️ Kubernetes-based scaling
+- 🔐 Secure deployment via SSH
+
+
+
+---
+
+👨‍💻 Author
+
+Vishanth Yelamarthy
+
+- GitHub: https://github.com/Y-Vishanth
+- LinkedIn: (www.linkedin.com/in/vishanth-yelamarthi)
+
+---
+
+
 
 
